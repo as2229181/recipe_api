@@ -3,12 +3,13 @@ Caculate function
 """
 
 
-def add(x,y):
+def add(x, y):
     """Add x and  y then return result."""
-    return x+y
+    return x + y
+
 
 def subtract(x, y):
     """Subtract x from y and return result."""
-    
-    res = y-x
+
+    res = y - x
     return res

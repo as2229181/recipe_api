@@ -7,4 +7,4 @@ exclude =
     manage.py,
     models.py,
     admin.py,
-
+    urls.py,

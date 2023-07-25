@@ -31,7 +31,7 @@ def create_recipe(user, **params):
         "link": "http://example.com.recipe.pdf",
     }
     defaults.update(params)
-    recipe = Recipe.objects.create(user=user, **defaults)
+    Recipe.objects.create(user=user, **defaults)
 
 
 class PublicRecipeAPITests(TestCase):

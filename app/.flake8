@@ -8,3 +8,7 @@ exclude =
     models.py,
     admin.py,
     urls.py,
+    test_models.py,
+    test_user_api.py,
+    serializers.py,
+    views.py

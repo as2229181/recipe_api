@@ -1,11 +1,18 @@
 """
 Test for models.
 """
+from unittest.mock import patch
+
 from decimal import Decimal
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from core import models
+
+
+def create_user(email="test@example.com", password="testpassword"):
+    """Create and return a new user ."""
+    return get_user_model().objects.create_user(email, password)
 
 
 class ModelTest(TestCase):
@@ -65,3 +72,24 @@ class ModelTest(TestCase):
         )
 
         self.assertEqual(str(recipe), recipe.title)
+
+    def test_create_tag(self):
+        """Test create a tag successful ."""
+        user = create_user()
+        tag = models.Tag.objects.create(user=user, name="tag1")
+        self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        """Test create ingredients of recipe"""
+        user = create_user()
+        ingredient = models.Ingredient.objects.create(user=user, name="ingredient1")
+        self.assertEqual(str(ingredient), ingredient.name)
+
+    @patch("core.models.uuid.uuid4")
+    def test_recipe_file_name_uuid(self, mock_uuid):
+        """Test generating image path."""
+        uuid = "test-uuid"
+        mock_uuid.return_value = uuid
+        file_path = models.recipe_image_file_path(None, "example.jpg")
+
+        self.assertEqual(file_path, f"uploads/recipe/{uuid}.jpg")
